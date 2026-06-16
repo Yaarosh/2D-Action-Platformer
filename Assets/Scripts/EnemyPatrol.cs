@@ -48,9 +48,15 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Health>().TakeDamage(10);
-            if(collision.gameObject.GetComponent<Health>().currentHealth!=0)
-                Debug.Log("liczba pozostalych punktow zycia: " + collision.gameObject.GetComponent<Health>().currentHealth);
+            Health playerHealth = collision.gameObject.GetComponent<Health>();
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(10, transform.position);
+
+                if (playerHealth.currentHealth != 0)
+                    Debug.Log("liczba pozostalych punktow zycia: " + playerHealth.currentHealth);
+            }
         }
     }
 }

@@ -31,3 +31,5 @@ ActiveBuildReport
 /*. those
 sysinfo.txt
 CrashReport*
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/

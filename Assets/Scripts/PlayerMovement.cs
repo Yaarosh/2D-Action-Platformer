@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange;
     [SerializeField] private LayerMask enemyLayer;
+    private bool isKnockedBack;
+    [SerializeField] private float silaOdrzutuX = 8f;
+    [SerializeField] private float silaOdrzutuY = 5f;
 
     private void Awake()
     {
@@ -32,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(isKnockedBack)
+        {
+            anim.SetTrigger("jump");
+            return;
+        }
 
         if(isAttacking)
         {
@@ -121,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Health>().TakeDamage(10);
+            enemy.GetComponent<Health>().TakeDamage(10, transform.position);
         }
     }
 
@@ -150,5 +159,14 @@ public class PlayerMovement : MonoBehaviour
 
         // Rysujemy druciane koło w pozycji punktu ataku o wielkości naszego zasięgu
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    public IEnumerator TriggerKnockback(Vector2 enemyPosition)
+    {
+        isKnockedBack = true;
+        float direction = transform.position.x < enemyPosition.x ? -1f : 1f;
+        body.linearVelocity = new Vector2(direction * silaOdrzutuX, silaOdrzutuY);
+        yield return new WaitForSeconds(0.4f);
+        isKnockedBack = false;
     }
 }
