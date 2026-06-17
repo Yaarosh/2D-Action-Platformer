@@ -4,10 +4,15 @@ public class Health : MonoBehaviour
 {
     [SerializeField] public float maxHealth;
     /*private*/ public float currentHealth;
+    [SerializeField] private HealthBar healthBar;
 
     void Start()
     {
-        currentHealth = maxHealth;    
+        currentHealth = maxHealth;
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
     void Update()
@@ -30,6 +35,11 @@ public class Health : MonoBehaviour
             }
         }
         currentHealth-=value;
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
 
         if(currentHealth <=0)
         {

@@ -33,3 +33,6 @@ sysinfo.txt
 CrashReport*
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+.idea/
+.DS_Store
+.DS_Store?

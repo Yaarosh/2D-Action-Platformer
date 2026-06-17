@@ -163,6 +163,8 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator TriggerKnockback(Vector2 enemyPosition)
     {
+        isAttacking = false;
+        body.gravityScale = originalGravity;
         isKnockedBack = true;
         float direction = transform.position.x < enemyPosition.x ? -1f : 1f;
         body.linearVelocity = new Vector2(direction * silaOdrzutuX, silaOdrzutuY);
