@@ -14,6 +14,12 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float lookAheadDistance = 3f; // Jak daleko przed gracza ma wysuwać się kamera
     [SerializeField] private float lookAheadSpeed = 6f;    // Jak szybko kamera ma przejeżdżać z lewej na prawą stronę gracza
 
+    [Header("Ograniczenia Pozycji (Clamping)")]
+    [SerializeField] private bool useMinY = true;          // Czy blokada dolna ma być włączona
+    [SerializeField] private float minYPosition = 0f;      // najniższy punkt
+    [SerializeField] private bool useMinX = true;          // Czy blokada na lewo ma być włączona
+    [SerializeField] private float minXPosition = 0f;      // najniższy punkt
+
     // Prywatne zmienne techniczne do obsługi płynności i fizyki
     private float currentXOffset;
     private float xVelocity = 0f;
@@ -60,6 +66,17 @@ public class CameraFollow : MonoBehaviour
         // 3. FINALE: Matematycznie wygładzamy ruch osobno dla X i dla Y
         float newX = Mathf.SmoothDamp(transform.position.x, targetX, ref xVelocity, smoothTimeX);
         float newY = Mathf.SmoothDamp(transform.position.y, targetY, ref yVelocity, currentSmoothTimeY);
+
+        if (useMinY)
+        {
+            // Zabezpieczamy 'newY' – jeśli wyliczona pozycja jest mniejsza niż minYPosition, weźmie minYPosition
+            newY = Mathf.Max(newY, minYPosition);
+        }
+        if (useMinX)
+        {
+            // Zabezpieczamy 'newX' – jeśli wyliczona pozycja jest mniejsza niż minXPosition, weźmie minXPosition
+            newX = Mathf.Max(newX, minXPosition);
+        }
 
         // Przypisujemy nową pozycję do kamery (oś Z zostaje bez zmian z offsetu)
         transform.position = new Vector3(newX, newY, offset.z);
