@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isKnockedBack;
     [SerializeField] private float silaOdrzutuX = 8f;
     [SerializeField] private float silaOdrzutuY = 5f;
+    private bool controlsDisabled = false;
 
     private void Awake()
     {
@@ -36,6 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (controlsDisabled)
+        {
+            horizontalInput = 0;
+            anim.SetBool("run", false);
+            anim.SetBool("grounded", isGrounded());
+            return;
+        }
         if(isKnockedBack)
         {
             anim.SetTrigger("jump");
@@ -170,5 +178,9 @@ public class PlayerMovement : MonoBehaviour
         body.linearVelocity = new Vector2(direction * silaOdrzutuX, silaOdrzutuY);
         yield return new WaitForSeconds(0.4f);
         isKnockedBack = false;
+    }
+    public void DisableControls()
+    {
+        controlsDisabled = true;
     }
 }

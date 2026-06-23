@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float lookAheadDistance = 3f; // Jak daleko przed gracza ma wysuwać się kamera
     [SerializeField] private float lookAheadSpeed = 6f;    // Jak szybko kamera ma przejeżdżać z lewej na prawą stronę gracza
 
-    [Header("Ograniczenia Pozycji (Clamping)")]
+    [Header("Position Restrictions (Clamping)")]
     [SerializeField] private bool useMinY = true;          // Czy blokada dolna ma być włączona
     [SerializeField] private float minYPosition = 0f;      // najniższy punkt
     [SerializeField] private bool useMinX = true;          // Czy blokada na lewo ma być włączona

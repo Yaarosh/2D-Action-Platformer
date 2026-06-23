@@ -6,6 +6,7 @@ public class Health : MonoBehaviour
     /*private*/ public float currentHealth;
     [SerializeField] private HealthBar healthBar;
     private bool isDead = false;
+    [SerializeField] private GameObject explosionParticlesPrefab;
 
     void Start()
     {
@@ -84,6 +85,12 @@ public class Health : MonoBehaviour
         else
         {
             Debug.Log(gameObject.name + " is dead!");
+
+            if (explosionParticlesPrefab != null)
+            {
+                GameObject spawnedFX = Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
+                Destroy(spawnedFX, 2f);
+            }
             Destroy(gameObject);
         }
     }

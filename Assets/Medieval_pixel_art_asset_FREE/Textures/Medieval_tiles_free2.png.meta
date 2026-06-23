@@ -664,8 +664,8 @@ TextureImporter:
         y: 523
         width: 48
         height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: -0.40783873, y: 1.6870239}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -704,10 +704,10 @@ TextureImporter:
       name: Medieval_tiles_free2_2
       rect:
         serializedVersion: 2
-        x: 160
+        x: 304
         y: 376
-        width: 384
-        height: 48
+        width: 48
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -814,10 +814,10 @@ TextureImporter:
       name: Medieval_tiles_free2_7
       rect:
         serializedVersion: 2
-        x: 640
-        y: 280
-        width: 96
-        height: 80
+        x: 499
+        y: 133
+        width: 58
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -836,10 +836,10 @@ TextureImporter:
       name: Medieval_tiles_free2_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 88
-        width: 528
-        height: 209
+        x: 16
+        y: 570
+        width: 48
+        height: 45
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -858,10 +858,10 @@ TextureImporter:
       name: Medieval_tiles_free2_9
       rect:
         serializedVersion: 2
-        x: 784
-        y: 89
-        width: 96
-        height: 190
+        x: 437
+        y: 156
+        width: 58
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
