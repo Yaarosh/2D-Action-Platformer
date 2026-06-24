@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
@@ -7,6 +8,23 @@ public class Health : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     private bool isDead = false;
     [SerializeField] private GameObject explosionParticlesPrefab;
+
+    [Header("Hit Flash Effect")]
+    [SerializeField] private Color flashColor = Color.red;
+    [SerializeField] private float flashDuration = 0.15f;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    private Coroutine flashCoroutine;
+
+    void Awake()
+    {
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+    }
 
     void Start()
     {
@@ -38,6 +56,10 @@ public class Health : MonoBehaviour
                 StartCoroutine(movement.TriggerKnockback(damageSourcePosition));
             }
         }
+        else
+        {
+            StartFlash();
+        }
 
         currentHealth -= value;
 
@@ -50,6 +72,25 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private void StartFlash()
+    {
+        if (spriteRenderer == null) return;
+
+        if (flashCoroutine != null)
+        {
+            StopCoroutine(flashCoroutine);
+        }
+        flashCoroutine = StartCoroutine(FlashRoutine());
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        spriteRenderer.color = flashColor;
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.color = originalColor;
+        flashCoroutine = null;
     }
 
     private void Die()
@@ -93,5 +134,19 @@ public class Health : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        if (healthBar != null) healthBar.SetHealth(currentHealth);
+
+        Debug.Log("PLayer healed. Current health: " + currentHealth);
     }
 }

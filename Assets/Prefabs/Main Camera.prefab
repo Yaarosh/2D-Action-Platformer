@@ -113,5 +113,9 @@ MonoBehaviour:
   lookAheadSpeed: 8
   useMinY: 1
   minYPosition: 0
+  useMaxY: 0
+  maxYPosition: 10
   useMinX: 1
   minXPosition: 0
+  useMaxX: 1
+  maxXPosition: 50

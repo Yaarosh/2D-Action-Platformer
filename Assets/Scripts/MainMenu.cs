@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [Header("Scene Names")]
-    [SerializeField] private string firstLevelName = "Level1"; // Wpisz tu nazwę swojej pierwszej sceny z grą
+    [SerializeField] private string firstLevelName = "Level0"; // Wpisz tu nazwę swojej pierwszej sceny z grą
     [SerializeField] private string levelSelectSceneName = "LevelSelect"; // Opcjonalna scena wyboru poziomów
 
     public void StartGame()
